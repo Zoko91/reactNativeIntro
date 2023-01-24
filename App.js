@@ -54,14 +54,43 @@ class MyComponent extends React.Component {
   }
 }
 
+const InputTextTP = () => {
+  const [text, setText] = useState("");
+  const [isValid, setIsValid] = useState(false);
+
+  const validateInput = (text) => {
+    setIsValid(true);
+  };
+
+  return (
+    <View>
+      <TextInput
+        style={{ fontSize: 20, textAlign: "center" }}
+        placeholder="Saisissez votre prénom ici !"
+        onChangeText={(text) => {
+          setText(text);
+          setIsValid(false);
+        }}
+        onSubmitEditing={() => validateInput(text)}
+        defaultValue={text}
+      />
+      {isValid ? <Text>Bienvenue {text} !</Text> : null}
+    </View>
+  );
+};
+
 export default function App() {
-  return <View style={styles.container}>{/*<MyComponent />*/}</View>;
+  return (
+    <View style={styles.container}>
+      {/*<MyComponent />*/}
+      <InputTextTP />
+    </View>
+  );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    marginTop: 60,
     alignItems: "center",
     justifyContent: "center",
     flexDirection: "column",
