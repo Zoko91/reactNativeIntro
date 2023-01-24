@@ -1,4 +1,3 @@
-import { StatusBar } from "expo-status-bar";
 import React, { useState, Component } from "react";
 import {
   Image,
@@ -13,7 +12,7 @@ import {
 } from "react-native";
 import { Dimensions } from "react-native";
 
-const { width, height } = Dimensions.get("window");
+const { width } = Dimensions.get("window");
 
 const people = [
   { id: 0, firstName: "Benoit", lastName: "Le Blanc" },
@@ -36,7 +35,6 @@ class MyComponent extends React.Component {
   state = {
     data: people,
   };
-
   renderItem = ({ item }) => (
     <Text style={styles.item}>
       {item.firstName} {item.lastName}
@@ -58,20 +56,20 @@ const InputTextTP = () => {
   const [text, setText] = useState("");
   const [isValid, setIsValid] = useState(false);
 
-  const validateInput = (text) => {
+  const validateInput = () => {
     setIsValid(true);
   };
 
   return (
     <View>
       <TextInput
-        style={{ fontSize: 20, textAlign: "center" }}
+        style={{ fontSize: 20, textAlign: "center", paddingBottom: 10 }}
         placeholder="Saisissez votre prénom ici !"
         onChangeText={(text) => {
           setText(text);
           setIsValid(false);
         }}
-        onSubmitEditing={() => validateInput(text)}
+        onSubmitEditing={() => validateInput()}
         defaultValue={text}
       />
       {isValid ? <Text>Bienvenue {text} !</Text> : null}
